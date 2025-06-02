@@ -46,7 +46,7 @@ FigTree ([http://tree.bio.ed.ac.uk/software/figtree](http://tree.bio.ed.ac.uk/so
 
 # Practical: Parameter and State inference using the approximate structured coalescent
 
-In this tutorial we will estimate migration rates, effective population sizes and locations of internal nodes using the marginal approximation of the structured coalescent implemented in BEAST2, MASCOT {% cite mueller2017mascot --file Mascot-Tutorial/master-refs %}.
+In this tutorial, we will estimate migration rates, effective population sizes and locations of internal nodes using the marginal approximation of the structured coalescent implemented in BEAST2, MASCOT {% cite mueller2017mascot --file Mascot-Tutorial/master-refs %}.
 
 The aim is to:
 
@@ -62,7 +62,7 @@ First, we have to download the package MASCOT using the BEAUTi package manager. 
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/MascotDownload.png" style="width:50%;"/>
+<a id="fig:example1"></a> <img src="figures/MascotDownload.png" style="width:80%;"/>
 
 <figcaption>Figure 1: Download the MASCOT package.</figcaption>
 
@@ -76,13 +76,13 @@ The sequence alignment is in the file [H3N2.nexus](http://github.com/nicfel/Masc
 
 ### Get the sampling times (Tip Dates)
 
-Open the "Tip Dates" panel and then select the "Use tip dates" checkbox.
+Open the _Tip Dates_ tab and then select the "Use tip dates" checkbox.
 
 The sampling times are encoded in the sequence names. We can tell BEAUti to use these by clicking the **Auto-configure** button. The sampling times appear following the third vertical bar "\|" in the sequence name. To extract these times, select "split on character", enter "\|" (without the quotes) in the text box immediately to the right, and then select "3" from the drop-down box to the right, as shown in the figure below.
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/TipDates.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/TipDates.png" style="width:80%;"/>
 
 <figcaption>Figure 2: Guess sampling times.</figcaption>
 
@@ -92,11 +92,13 @@ Clicking "Ok" should now populate the table with the sample times extracted from
 
 ### Specify the Site Model (Site Model)
 
-Next, we have to specify the site model. To do this, choose the "Site Model" tab. For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions). Additionally, we should allow for different rate categories for different sites in the alignment. This can be done by setting the _Gamma Category Count_ to 4, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
+Next, we have to specify the site model. To do this, choose the _Site Model_ tab. For Influenza Hemagluttanin sequences as we have here, HKY is the most commonly used model of nucleotide evolution. This model allows for differences in transversion and transition rates, meaning that changes between bases that are chemically more closely related (transitions) are allowed to have a different rate to changes between bases that chemically more distinct (transversions).
+
+Additionally, we should allow for different rate categories for different sites in the alignment. This can be done by setting the **"Gamma Category Count" to 4**, which is just a value that has typically been used. Make sure that estimate is checked next to the shape parameter. To reduce the number of parameters we have to estimate, we can set Frequencies to Empirical.
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/SiteModel.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/SiteModel.png" style="width:80%;"/>
 
 <figcaption>Figure 4: Set the site model.</figcaption>
 
@@ -104,25 +106,26 @@ Next, we have to specify the site model. To do this, choose the "Site Model" tab
 
 ### Set the clock model (Clock Model)
 
-For rapidly evolving viruses, the assumption of a strict molecular clock is often made, meaning that the molecular clock is the same on each branch of the phylogeny. To decrease the burnin phase, we can set the initial value to 0.005.
+Now, we move to the _Clock Model_ tab. For rapidly evolving viruses, the assumption of a strict molecular clock is often made, meaning that the molecular clock is the same on each branch of the phylogeny. To reduce the burn-in phase, we can set the **initial value to 0.005**. Please note that this is **not** the prior on the clock rate (yet), but the **starting value** of the parameter in MCMC.
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/ClockRate.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/ClockRate.png" style="width:80%;"/>
 
 <figcaption>Figure 5: Set the initial clock rate.</figcaption>
 
 </figure>
 
 ### Get the sampling locations (Tip Locations)
+Next, we switch to the _Priors_ tab.
 
-We first have to choose the tree prior, which in this case is MASCOT. We do this by switching to the _Priors_ tab. Search the drop down menu next to `Tree.t:H3N2` and choose MASCOT. By default, the rate dynamics for this setting is `Constant`, which means that effective population sizes and migration rates are assumed to be constant through time. We next have to define the sampling location of the individual tips.
+We first have to choose the tree prior, which in this case is MASCOT. Search the drop down menu next to `Tree.t:H3N2` and choose MASCOT. By default, the rate dynamics is `Constant`, which means that effective population sizes and migration rates are assumed to be constant through time. We next have to define the sampling location of the individual tips.
 
 Initially the column **Location** should be _NOT\_SET_ for every sequence. After clicking the **Guess** button, you can split the sequence on the vertical bar "\|" again by selecting "split on character" and entering "\|" in the box. However, the locations are in the fourth group, so this time choose "4" from the drop-down menu. After clicking the **OK** button, the window should look like the one shown in the figure below:
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/TipLocations.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/TipLocations.png" style="width:80%;"/>
 
 <figcaption>Figure 3: Configuring sample locations.</figcaption>
 
@@ -130,31 +133,31 @@ Initially the column **Location** should be _NOT\_SET_ for every sequence. After
 
 ### Specify the priors (Priors)
 
-Now, we need to set the priors for the various parameters of the model. You can find the parameter priors below the tree prior.
+Now, we need to set the priors for the various parameters of the model. Under the _Priors_ tab, you can find the parameter priors below the tree prior.
 
-First, consider the effective population size parameter _Ne_. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case we will use a log normal prior with parameters M=0 and S=1. (These are respectively the mean and variance of the corresponding normal distribution in log space.) To use this prior, choose "Log Normal" from the drop down menu to the right of the `Ne.t:H3N2` parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e. M=0 and S=1). Ensure that the "Mean In Real Space" checkbox remains unchecked.
+First, consider the **effective population size _Ne_**. Since we have only a few samples per location, meaning little information about the different effective population sizes, we will need an informative prior. In this case, we will use a log normal prior with parameters **M=0** and **S=1**. (These are respectively the **mean** and **variance** of the corresponding normal distribution in log space.) To use this prior, choose "Log Normal" from the drop down menu to the right of the `Ne.t:H3N2` parameter label, then click the arrow to the left of the same label and fill in the parameter values appropriately (i.e., **M=0** and **S=1**). Ensure that the "Mean In Real Space" checkbox remains unchecked.
 
-The existing exponential distribution as a prior on the migration rate puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and very _very_ small values is generally a good choice. Be aware however that the exponential distribution is quite an informative prior: one should be careful that to choose a mean so that feasible rates are at least within the 95% HPD interval of the prior. (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.) We keep the default mean value of 1.
+The existing exponential distribution as a prior on the **migration rate** puts much weight on lower values while not prohibiting larger ones. For migration rates, a prior that prohibits too large values while not greatly distinguishing between very small and _very_ very small values is generally a good choice. However, be aware that the exponential distribution is quite an informative prior: one should be careful when choosing its mean so that feasible migration rates lie within the 95% interval of the prior distribution. (This can be determined by clicking the arrow to the left of the parameter name and looking at the values below the graph that appears on the right.) We keep the default **mean value of 1** for `migrationConstant`.
 
-Finally, set the prior for the clock rate. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledge, we can set the prior on the clock rate to a Log Normal distribution with mean in **real space** set to 0.005. To specify the mean in real space, make sure that the box "Mean In Real Space" is checked. If we set the S value to 0.25, we say that we expect the clock rate to be with 95% certainty between 0.00321 and 0.00731.
+Finally, set the prior for the **clock rate**. We have a good idea about the clock rate of Influenza A/H3N2 Hemagglutinin. From previous work by other people, we know that the clock rate will be around 0.005 substitution per site per year. To include that prior knowledge, we can set the prior on the `clockRate` to a Log Normal distribution with **a mean of 0.005 in real space**. To specify the mean in real space, make sure that the box "Mean In Real Space" is checked. If we set the **S value to 0.25**, we expect the clock rate to be between 0.00321 and 0.00731 with 95% uncertainty.
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/Priors.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/Priors.png" style="width:80%;"/>
 
 <figcaption>Figure 6: Set up of the prior distributions.</figcaption>
 
 </figure>
 
-We keep the default priors for the parameters gammaShape and kappa.
+We keep the default priors for the site model parameters `gammaShape` and `kappa`.
 
 ### Specify the MCMC chain length (MCMC)
 
-Now switch to the "MCMC" tab. Here we can set the length of the MCMC chain and decide how frequently the parameter and trees are logged. For this dataset, 2 million iterations should be sufficient. In order to have enough samples but not create too large files, we can set the logEvery to 2000, so we have 1001 samples overall. Do this for the tracelog and the treelog. Next, we have to save the `*.xml` file using **File** >> **Save as**.
+Now switch to the _MCMC_ tab. Here we can set the length of the MCMC chain and decide how frequently the parameter and trees are logged. For this dataset, 2 million iterations should be sufficient. In order to have enough samples but not create too large files, we can set the logEvery to 2000, so we have 1001 samples overall. Do this for the tracelog and the treelog. Next, we have to save the `*.xml` file using **File** >> **Save as**.
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/MCMC.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/MCMC.png" style="width:80%;"/>
 
 <figcaption>Figure 7: save the \*.xml.</figcaption>
 
@@ -162,7 +165,9 @@ Now switch to the "MCMC" tab. Here we can set the length of the MCMC chain and d
 
 ### Run the analysis using BEAST2
 
-Run the `*.xml` using BEAST2 or use finished runs from the _precooked-runs_ folder. The analysis should take about 6 to 7 minutes. If you want to learn some more about what the migration rates we actually estimate, have a look at this blog post of Peter Beerli [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html).
+Run the `*.xml` using BEAST2 or use finished runs from the _precooked-runs_ folder. The analysis should take about 6 to 7 minutes.
+
+If you want to learn some more about what the migration rates we actually estimate, have a look at this blog post of Peter Beerli [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html).
 
 ### Analyse the log file using Tracer
 
@@ -170,7 +175,7 @@ First, we can open the `*.log` file in tracer to check if the MCMC has converged
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/LogPosterior.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/LogPosterior.png" style="width:80%;"/>
 
 <figcaption>Figure 8: Check if the posterior converged.</figcaption>
 
@@ -180,7 +185,7 @@ We can have a look at the marginal posterior distributions for the effective pop
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/LogNe.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/LogNe.png" style="width:80%;"/>
 
 <figcaption>Figure 9: Compare the different inferred effective population sizes.</figcaption>
 
@@ -190,19 +195,19 @@ In this example, we have relatively little information about the effective popul
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/MeanMedian.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/MeanMedian.png" style="width:80%;"/>
 
 <figcaption>Figure 10: Differences between mean and median estimates.</figcaption>
 
 </figure>
 
-We can then look at the inferred migration rates. The migration rates have the label b_migration.\*, meaning that they are backwards in time migration rates. The highest rates are from New York to Hong Kong. Because they are backwards in time migration rates, this means that lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong backwards.
+We can then look at the inferred migration rates. The migration rates have the label b_migration.\*, meaning that they are **backwards-in-time** migration rates. The highest rates are from New York to Hong Kong. Because they are backwards-in-time migration rates, lineages from New York are inferred to be likely from Hong Kong if we're going backwards in time. In the inferred phylogenies, we should therefore make the observation that lineages ancestral to samples from New York are inferred to be from Hong Kong.
 
 A more in depth explanation of what backwards migration really are can be found here [http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html](http://popgen.sc.fsu.edu/Migrate/Blog/Entries/2013/3/22_forward-backward_migration_rates.html)
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/LogMigration.png" style="width:70%;"/>
+<a id="fig:example1"></a> <img src="figures/LogMigration.png" style="width:80%;"/>
 
 <figcaption>Figure 11: Compare the inferred migration rates.</figcaption>
 
@@ -210,19 +215,21 @@ A more in depth explanation of what backwards migration really are can be found 
 
 ### Make the summary tree using TreeAnnotator
 
-Next, we want to summarize the trees. This we can do using TreeAnnotator. Until recently the _maximum clade credibility_ tree (MCC) has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node. A new point estimate, called a _conditional clade distribution_ tree (CCD) has been proposed {% cite berling2025 --file Mascot-Tutorial/master-refs %}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different are the point estimates calculated for replicate MCMC chains). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them to summarise the posterior tree distribution. **To save time, you may run just one method and compare it to the other using the example below.**
+Next, we want to summarize the trees. This we can do using TreeAnnotator. Until recently the **_maximum clade credibility_ tree (MCC)** has been the default summary method in TreeAnotator. To produce MCC trees TreeAnotator takes the set of trees and find the best supported tree by maximising the product of the posterior clade probabilities. It will then annotate this representative summary tree with the mean ages of all the nodes and the corresponding 95% HPD ranges as well as the posterior clade probability for each node.
+
+A new point estimate, called a **_conditional clade distribution_ tree (CCD)** has been proposed {% cite berling2025 --file Mascot-Tutorial/master-refs %}. It has been shown to outperform MCC in terms of accuracy (based on Robinson-Foulds distance to the true tree) and precision (how different the point estimates calculated for replicate MCMC chains are). CCD methods may produce a tree that would be well supported but has not been sampled during MCMC. This is beneficial for large trees and complex parameter regimes. Since both methods are still widely used, we show how to use them to summarise the posterior tree distribution. **To save time, you may run just one method and compare it to the other using the example below.**
 
 #### Producing MCC tree
 
 > Open **TreeAnnotator** and then set the options as in the [Figure 12](#fig:mcc) below. You have to specify the **Burnin percentage**, **Target tree type**, **Node heights**, **Input Tree File** and the **Output File**.
 >
-> Use the typed trees in the file `H3N2.H3N2.trees` as **Input Tree File**. Name output file `H3N2.mcc.tree`.
+> Use the typed trees in the file `H3N2-typed.trees` as **Input Tree File**. Name output file `H3N2.mcc.tree`.
 >
 > After clicking **Run** the program should summarize the trees.
 
 <figure>
 
-<a id="fig:mcc"></a> <img src="figures/TreeAnnotator.png" style="width:50%;"/>
+<a id="fig:mcc"></a> <img src="figures/treeannotator.mcc.png" style="width:80%;"/>
 
 <figcaption>Figure 12: Make the maximum clade credibility tree.</figcaption>
 
@@ -248,15 +255,15 @@ To produce CCD0 summary tree, you will first need to install the CCD package.
 
 Now you can proceed to make CCD0 tree:
 
-> Open **TreeAnnotator** and then set the options as in the [Figure 13](#fig:ccd0) below. You have to specify the **Burnin percentage**, the **Node heights**, **Input Tree File** and the **Output File**.
+> Open **TreeAnnotator** and then set the options as in the [Figure 14](#fig:ccd0) below. You have to specify the **Burnin percentage**, the **Node heights**, **Input Tree File** and the **Output File**.
 >
-> Use the typed trees in the file `H3N2.H3N2.trees` as **Input Tree File**. Name output file `H3N2.ccd0.tree`.
+> Use the typed trees in the file `H3N2-typed.trees` as **Input Tree File**. Name output file `H3N2.ccd0.tree`.
 >
 > After clicking **Run** the program should summarize the trees.
 
 <figure>
 
-<a id="fig:ccd0"></a> <img src="figures/treeannotator.ccd0.png" width="60%"/>
+<a id="fig:ccd0"></a> <img src="figures/treeannotator.ccd0.png" width="80%"/>
 
 <figcaption>Figure 14: Make the conditional clade credibility tree.</figcaption>
 
@@ -274,7 +281,7 @@ In each logging step of the tree during the MCMC, MASCOT logs several different 
 >
 > You may optionally increase line weight (**Appearance** \>\> **Line weight**) and tip label font (**Tip Labels** \>\> **Font size**).
 
-Figures 15 and 16 show the MCC and CCD0 trees respectively. First analyse tree for the method you followed.
+Figures [15](#fig:figtree.mcc) and [16](#fig:figtree.ccd0) show the MCC and CCD0 trees respectively. First analyse tree for the method you followed.
 
 We can determine if lineages ancestral to samples from New York are actually inferred to be from Hong Kong, or the probability of the root being in any of the locations.
 
@@ -286,7 +293,7 @@ Another important thing to know is that currently, we assume rates to be constan
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/figtree.mcc.png" style="width:100%;"/>
+<a id="fig:figtree.mcc"></a> <img src="figures/figtree.mcc.png" style="width:100%;"/>
 
 <figcaption>Figure 15: MCC tree, inferred node locations.</figcaption>
 
@@ -294,15 +301,15 @@ Another important thing to know is that currently, we assume rates to be constan
 
 <figure>
 
-<a id="fig:example1"></a> <img src="figures/figtree.ccd0.png" style="width:100%;"/>
+<a id="fig:figtree.ccd0"></a> <img src="figures/figtree.ccd0.png" style="width:100%;"/>
 
 <figcaption>Figure 16: CCD0 tree, inferred node locations.</figcaption>
 
 </figure>
 
-Now, compare the figures for MCC and CCD0 summary trees. Can you see some differences?
-
-One of the CCD0 summary method advantages is that it can evaluate tree topologies that were not sampled during the MCMC. This is why it usually performs better on high-entropy (uncertain, spread out) tree posterior. Knowing this, what observations can you make about our sample?
+> Now, compare the figures for MCC and CCD0 summary trees. Can you see some differences?
+>
+> One advantage of the CCD0 summary method is that it can evaluate tree topologies that were not sampled during the MCMC. This is why it usually performs better on high-entropy (uncertain, spread-out) tree posterior. Knowing this, what observations can you make about our sample?
 
 ### Errors that can occur (Work in progress)
 
@@ -310,13 +317,17 @@ One of the errors message that can occur regularly is the following: `too many i
 
 This error can have different origins and a likely incomplete list is the following:
 
--   The priors on migration rates put too much weight on really high rates. To fix this, reconsider your priors on the migration rates. Particularly, check if the prior on the migration rates make sense in comparison to the height of the tree. If, for example, the tree has a height of 1000 years, but the prior on the migration rate is exponential with mean 1, then the prior assumption is that between any two states, we expected approximately 1000 migration events.
+-   The prior on **migration rates** puts too much weight on really **high** rates. 
+	- To fix this, reconsider your prior on the migration rates. Particularly, check if the prior on the migration rates makes sense in comparison to the height of the tree. If, for example, the tree has a height of 1000 years, but the prior on the migration rate is exponential with mean 1, then the prior assumption is that between any two states, we expect approximately 1000 migration events.
 
--   The prior on the effective population sizes is too low, meaning that the prior on the coalescent rates (1 over the effective population size) is too high. This can for example occur when the prior on the effective population size was chosen to be 1/X. To fix, reconsider your prior on the effective population size.
+-   The prior on the **effective population sizes** is too **low**.
+	- This means that the prior on the coalescent rate (1 over the effective population size) is too high. This can occur when the prior on the effective population size was chosen to be 1/X. To fix, reconsider your prior on the effective population size.
 
--   There is substantial changes of the effective population sizes and/or migration rates over time that are not modeled. In that case, changes in the effective population sizes or migration rates have to be explained by population structure, which can again lead to some effective population sizes being very low and some migration rates being very high. In that case, there is unfortunately not much that can be done, since MASCOT is not an appropriate model for the dataset.
+-   There are substantial changes of effective population sizes and/or migration rates over time that are not modelled.
+	- In that case, changes in the effective population sizes or migration rates have to be explained by population structure, which can again lead to some very low effective population sizes and very high migration rates. There is unfortunately not much that can be done here since MASCOT is not an appropriate model for the dataset.
 
--   There is strong subpopulation structure within the different subpopulations used. In that case, reconsider if the individual sub-populations used are reasonable.
+-   There is strong sub-population structure within the populations we assgined.
+	- In that case, reconsider if the individual populations used are reasonable.
 
 ----
 
