@@ -319,13 +319,10 @@ This error can have different origins and a likely incomplete list is the follow
 
 -   The prior on **migration rates** puts too much weight on really **high** rates. 
 	- To fix this, reconsider your prior on the migration rates. Particularly, check if the prior on the migration rates makes sense in comparison to the height of the tree. If, for example, the tree has a height of 1000 years, but the prior on the migration rate is exponential with mean 1, then the prior assumption is that between any two states, we expect approximately 1000 migration events.
-
 -   The prior on the **effective population sizes** is too **low**.
 	- This means that the prior on the coalescent rate (1 over the effective population size) is too high. This can occur when the prior on the effective population size was chosen to be 1/X. To fix, reconsider your prior on the effective population size.
-
 -   There are substantial changes of effective population sizes and/or migration rates over time that are not modelled.
 	- In that case, changes in the effective population sizes or migration rates have to be explained by population structure, which can again lead to some very low effective population sizes and very high migration rates. There is unfortunately not much that can be done here since MASCOT is not an appropriate model for the dataset.
-
 -   There is strong sub-population structure within the populations we assgined.
 	- In that case, reconsider if the individual populations used are reasonable.
 
