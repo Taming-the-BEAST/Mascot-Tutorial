@@ -1,11 +1,23 @@
 ---
 author: Nicola F. Müller
-level: Intermediate
 title: MASCOT v3.0.0 Tutorial
 subtitle: Parameter and State inference using the approximate structured coalescent
-beastversion: 2.7.x
 tracerversion: 1.7.2
 figtreeversion: 1.4.4
+beastversion_tutorial: 2.7.x
+workflow: Advanced analysis
+status: current
+keywords:
+- structured coalescent
+- migration
+- population structure
+- phylogeography
+packages:
+- Mascot
+- CCD
+domains:
+- phylogeography
+- epidemiology
 ---
 
 # Background
